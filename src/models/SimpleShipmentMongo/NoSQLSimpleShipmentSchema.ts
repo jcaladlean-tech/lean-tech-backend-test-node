@@ -1,0 +1,43 @@
+const SimpleShipmentSchema = {
+  quoteRefId: { type: String, required: 'Enter a quoteRefId' },
+  from: {
+    city: { type: String, required: 'Enter a city' },
+    state: { type: String, required: 'Enter a state' },
+    country: { type: String, required: 'Enter a country' },
+    zip: { type: String, required: 'Enter a zip' },
+    contact: {
+      company: { type: String, required: 'Enter a company' },
+      address: { type: String, required: 'Enter an address' },
+      name: { type: String, required: 'Enter a name' },
+      email: { type: String, required: 'Enter an email' },
+      phone: { type: String, required: 'Enter a phone' },
+    },
+  },
+  to: {
+    city: { type: String, required: 'Enter a city' },
+    state: { type: String, required: 'Enter a state' },
+    country: { type: String, required: 'Enter a country' },
+    zip: { type: String, required: 'Enter a zip' },
+    contact: {
+      company: { type: String, required: 'Enter a company' },
+      address: { type: String, required: 'Enter an address' },
+      name: { type: String, required: 'Enter a name' },
+      email: { type: String, required: 'Enter an email' },
+      phone: { type: String, required: 'Enter a phone' },
+    },
+  },
+  products: {
+    itemName: { type: String, required: 'Enter an itemName' },
+    description: { type: String, required: 'Enter a description' },
+    pieces: { type: String, required: 'Enter a pieces' },
+    quantity: { type: String, required: 'Enter a quantity' },
+    weight: { type: String, required: 'Enter a weight' },
+    packageType: { type: String, required: 'Enter a packageType' },
+    freightClass: { type: String, required: 'Enter a freightClass' },
+    hazmat: { type: Boolean, required: 'Enter a hazmat' },
+  },
+  accessorials: { type: Array },
+  instructionsShipper: { type: String },
+  instructionsConsignee: { type: String },
+  references: { type: Array },
+};
