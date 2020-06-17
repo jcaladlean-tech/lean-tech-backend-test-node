@@ -1,7 +1,6 @@
 import ResponseOperation from '../helpers/ResponseOperation';
 
 export interface IContact {
-  _id?: string;
   company: string;
   address: string;
   name: string;
@@ -10,7 +9,6 @@ export interface IContact {
 }
 
 export interface ILocation {
-  _id?: string;
   city: string;
   state: string;
   country: string;
@@ -19,12 +17,11 @@ export interface ILocation {
 }
 
 export interface IProduct {
-  _id?: string;
   itemName: string;
   description: string;
-  pieces: string;
-  quantity: string;
-  weight: string;
+  pieces: number;
+  quantity: number;
+  weight: number;
   packageType: string;
   freightClass: string;
   hazmat: boolean;
@@ -36,10 +33,10 @@ export interface ISimpleShipment {
   from?: ILocation;
   to?: ILocation;
   products?: IProduct;
-  accessorials?: string;
+  accessorials?: string[];
   instructionsShipper?: string;
   instructionsConsignee?: string;
-  references?: string;
+  references?: string[];
 }
 
 export interface ISimpleShipmentController {
