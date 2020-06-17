@@ -6,7 +6,7 @@ export const config = {
     host: process.env.HOST,
     protocol: 'http',
   },
-  dataBase: {
+  mongoDataBase: {
     URL: process.env.MONGO_URL,
     options: {
       poolSize: 5,
@@ -17,5 +17,12 @@ export const config = {
       useFindAndModify: false,
       useCreateIndex: true,
     },
+  },
+  postgresqlDataBase: {
+    host: process.env.PGHOST,
+    user: process.env.PGUSER,
+    dataBase: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT,
   },
 };
