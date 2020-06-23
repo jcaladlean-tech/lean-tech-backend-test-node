@@ -25,4 +25,8 @@ export const config = {
     password: process.env.PGPASSWORD,
     port: process.env.PGPORT,
   },
+  eia:{
+    apiKey: process.env.EIA_API_KEY,
+    baseUrl: process.env.EIA_URL
+  }
 };

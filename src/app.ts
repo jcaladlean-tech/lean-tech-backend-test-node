@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 // routes
 import HelloWorldServices from './services/HelloWorldServices';
 import SimpleShipmentServices from './services/SimpleShipmentServices';
+import EIAAPIServices from './services/EIAAPIServices';
 
 class App {
   public app: express.Application;
@@ -22,6 +23,7 @@ class App {
   private addServices(): void {
     HelloWorldServices.routes(this.app);
     SimpleShipmentServices.routes(this.app);
+    EIAAPIServices.routes(this.app);
   }
 }
 
