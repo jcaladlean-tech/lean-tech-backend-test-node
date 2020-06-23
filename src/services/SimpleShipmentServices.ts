@@ -9,7 +9,7 @@ import { Request, Response } from 'express';
 
 export default class SimpleShipmentServices {
   public static routes(app: any) {
-    app.post('/api/nosql/shipment', (req: Request, res: Response) => {
+    app.post('/api/:sqlparam(nosql|sql)/shipment', (req: Request, res: Response) => {
       try {
         return this.create(req, res);
       } catch (e) {
@@ -26,7 +26,7 @@ export default class SimpleShipmentServices {
       }
     });
 
-    app.get('/api/nosql/shipment/:id?', (req: Request, res: Response) => {
+    app.get('/api/:sqlparam(nosql|sql)/shipment/:id?', (req: Request, res: Response) => {
       try {
         if (req.params.id) return this.getById(req, res);
         else return this.getAll(req, res);
@@ -44,7 +44,7 @@ export default class SimpleShipmentServices {
       }
     });
 
-    app.put('/api/nosql/shipment/:id', (req: Request, res: Response) => {
+    app.put('/api/:sqlparam(nosql|sql)/shipment/:id', (req: Request, res: Response) => {
       try {
         return this.update(req, res);
       } catch (e) {
@@ -61,7 +61,7 @@ export default class SimpleShipmentServices {
       }
     });
 
-    app.delete('/api/nosql/shipment/:id', (req: Request, res: Response) => {
+    app.delete('/api/:sqlparam(nosql|sql)/shipment/:id', (req: Request, res: Response) => {
       try {
         return this.delete(req, res);
       } catch (e) {
@@ -80,9 +80,8 @@ export default class SimpleShipmentServices {
   }
 
   private static create(req: Request, res: Response) {
-    const simpleShipmentController: ISimpleShipmentController = new SimpleShipmentController(
-      'mongo'
-    );
+    const db = req.params.sqlparam === 'nosql' ? 'mongo' : 'sql';
+    const simpleShipmentController: ISimpleShipmentController = new SimpleShipmentController(db);
     const shipment: ISimpleShipment = {
       quoteRefId: req.body.quoteRefId,
       from: req.body.from,
@@ -103,9 +102,8 @@ export default class SimpleShipmentServices {
   }
 
   private static getAll(req: Request, res: Response) {
-    const simpleShipmentController: ISimpleShipmentController = new SimpleShipmentController(
-      'mongo'
-    );
+    const db = req.params.sqlparam === 'nosql' ? 'mongo' : 'sql';
+    const simpleShipmentController: ISimpleShipmentController = new SimpleShipmentController(db);
     simpleShipmentController
       .getSimpleShipments()
       .then((result) => this.response(res, result))
@@ -113,9 +111,8 @@ export default class SimpleShipmentServices {
   }
 
   private static getById(req: Request, res: Response) {
-    const simpleShipmentController: ISimpleShipmentController = new SimpleShipmentController(
-      'mongo'
-    );
+    const db = req.params.sqlparam === 'nosql' ? 'mongo' : 'sql';
+    const simpleShipmentController: ISimpleShipmentController = new SimpleShipmentController(db);
     const { id } = req.params;
     simpleShipmentController
       .getSimpleShipmentById(id)
@@ -124,9 +121,8 @@ export default class SimpleShipmentServices {
   }
 
   private static update(req: Request, res: Response) {
-    const simpleShipmentController: ISimpleShipmentController = new SimpleShipmentController(
-      'mongo'
-    );
+    const db = req.params.sqlparam === 'nosql' ? 'mongo' : 'sql';
+    const simpleShipmentController: ISimpleShipmentController = new SimpleShipmentController(db);
     const shipment: ISimpleShipment = {
       quoteRefId: req.body.quoteRefId,
       from: req.body.from,
@@ -148,9 +144,8 @@ export default class SimpleShipmentServices {
   }
 
   private static delete(req: Request, res: Response) {
-    const simpleShipmentController: ISimpleShipmentController = new SimpleShipmentController(
-      'mongo'
-    );
+    const db = req.params.sqlparam === 'nosql' ? 'mongo' : 'sql';
+    const simpleShipmentController: ISimpleShipmentController = new SimpleShipmentController(db);
     const { id } = req.params;
     simpleShipmentController
       .deleteSimpleShipment(id)

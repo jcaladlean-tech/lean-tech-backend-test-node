@@ -33,23 +33,16 @@ export interface ISimpleShipment {
   from?: ILocation;
   to?: ILocation;
   products?: IProduct;
-  accessorials?: string[];
+  accessorials?: string;
   instructionsShipper?: string;
   instructionsConsignee?: string;
-  references?: string[];
+  references?: string;
 }
 
 export interface ISimpleShipmentController {
-  createSimpleShipment(
-    shipment: ISimpleShipment
-  ): Promise<ResponseOperation<ISimpleShipment>>;
+  createSimpleShipment(shipment: ISimpleShipment): Promise<ResponseOperation<ISimpleShipment>>;
   getSimpleShipments(): Promise<ResponseOperation<ISimpleShipment[]>>;
-  getSimpleShipmentById(
-    id: string
-  ): Promise<ResponseOperation<ISimpleShipment>>;
-  updateSimpleShipment(
-    id: string,
-    shipment: ISimpleShipment
-  ): Promise<ResponseOperation<ISimpleShipment>>;
+  getSimpleShipmentById(id: string): Promise<ResponseOperation<ISimpleShipment>>;
+  updateSimpleShipment(id: string, shipment: ISimpleShipment): Promise<ResponseOperation<ISimpleShipment>>;
   deleteSimpleShipment(id: string): Promise<ResponseOperation<ISimpleShipment>>;
 }

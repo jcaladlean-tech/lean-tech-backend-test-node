@@ -1,5 +1,6 @@
-import SimpleShipmentDaoMongo from '../models/SimpleShipmentMongo/SimpleShipmentDaoMongo';
-import { SimpleShipmentDao } from '../models/SimpleShipmentMongo/SimpleShipmentDao';
+import SimpleShipmentDaoMongo from '../models/SimpleShipment/SimpleShipmentDaoMongo';
+import SimpleShipmentDaoPostgreSql from '../models/SimpleShipment/SimpleShipmentDaoPostgreSql';
+import { SimpleShipmentDao } from '../models/SimpleShipment/SimpleShipmentDao';
 import ResponseOperation from '../helpers/ResponseOperation';
 import { HttpCode } from '../helpers/HttpCodes';
 import {
@@ -11,8 +12,8 @@ export default class ProductController implements ISimpleShipmentController {
   simpleShipment: SimpleShipmentDao;
 
   constructor(db: string) {
-    if(db === 'mongo')
-      this.simpleShipment = new SimpleShipmentDaoMongo();
+    if (db === 'mongo') this.simpleShipment = new SimpleShipmentDaoMongo();
+    if (db === 'sql') this.simpleShipment = new SimpleShipmentDaoPostgreSql();
   }
 
   public async createSimpleShipment(shipment: ISimpleShipment): Promise<ResponseOperation<ISimpleShipment>> {
