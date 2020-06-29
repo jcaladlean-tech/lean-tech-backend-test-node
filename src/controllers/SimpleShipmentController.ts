@@ -8,7 +8,7 @@ import {
   ISimpleShipmentController,
 } from '../interfaces/SimpleShipmetInterfaces';
 
-export default class ProductController implements ISimpleShipmentController {
+export default class SimpleShipmentController implements ISimpleShipmentController {
   simpleShipment: SimpleShipmentDao;
 
   constructor(db: string) {
@@ -76,7 +76,7 @@ export default class ProductController implements ISimpleShipmentController {
       });
   }
 
-  deleteSimpleShipment(id: string): Promise<ResponseOperation<ISimpleShipment>> {
+  public async deleteSimpleShipment(id: string): Promise<ResponseOperation<ISimpleShipment>> {
     return this.simpleShipment
       .delete(id)
       .then((deletedShipment: ISimpleShipment) => {

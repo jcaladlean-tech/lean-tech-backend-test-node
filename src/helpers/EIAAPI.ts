@@ -6,7 +6,6 @@ export default async function EiaApi() {
     url: `${config.eia.baseUrl}?api_key=${config.eia.apiKey}&series_id=PET.EMM_EPM0U_PTE_NUS_DPG.W`,
   };
   const weeklyRetailGasoline = await axiosRequest(requestEia);
-  console.log(weeklyRetailGasoline.series[0].data[0]);
   return weeklyRetailGasoline.series[0].data[0];
 }
 
