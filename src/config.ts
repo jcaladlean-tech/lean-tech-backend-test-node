@@ -28,5 +28,8 @@ export const config = {
   eia:{
     apiKey: process.env.EIA_API_KEY,
     baseUrl: process.env.EIA_URL
+  },
+  auth: {
+    token_key: process.env.TOKEN_KEY
   }
 };

@@ -6,10 +6,11 @@ import {
 import ResponseOperation from '../helpers/ResponseOperation';
 import { HttpCode } from '../helpers/HttpCodes';
 import { Request, Response } from 'express';
+import { authentication, authorize } from '../helpers/AuthenticationFunction';
 
 export default class CarrierServices {
   public static routes(app: any) {
-    app.post('/api/demo/carrier', (req: Request, res: Response) => {
+    app.post('/api/demo/carrier', authentication, authorize('admin'), (req: Request, res: Response) => {
       try {
         return this.create(req, res);
       } catch (e) {
@@ -26,7 +27,7 @@ export default class CarrierServices {
       }
     });
 
-    app.get('/api/demo/carrier/:id?', (req: Request, res: Response) => {
+    app.get('/api/demo/carrier/:id?', authentication, (req: Request, res: Response) => {
       try {
         if (req.params.id) return this.getById(req, res);
         else return this.getAll(req, res);
@@ -44,7 +45,7 @@ export default class CarrierServices {
       }
     });
 
-    app.put('/api/demo/carrier/:id', (req: Request, res: Response) => {
+    app.put('/api/demo/carrier/:id', authentication, authorize('admin'), (req: Request, res: Response) => {
       try {
         return this.update(req, res);
       } catch (e) {
@@ -61,7 +62,7 @@ export default class CarrierServices {
       }
     });
 
-    app.delete('/api/demo/carrier/:id', (req: Request, res: Response) => {
+    app.delete('/api/demo/carrier/:id', authentication, authorize('admin'), (req: Request, res: Response) => {
       try {
         return this.delete(req, res);
       } catch (e) {

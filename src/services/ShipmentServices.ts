@@ -6,11 +6,11 @@ import {
 import ResponseOperation from '../helpers/ResponseOperation';
 import { HttpCode } from '../helpers/HttpCodes';
 import { Request, Response } from 'express';
-import moment from 'moment';
+import { authentication, authorize } from '../helpers/AuthenticationFunction';
 
 export default class ShipmentServices {
   public static routes(app: any) {
-    app.post('/api/demo/shipment', (req: Request, res: Response) => {
+    app.post('/api/demo/shipment', authentication, authorize('admin'), (req: Request, res: Response) => {
       try {
         return this.create(req, res);
       } catch (e) {
@@ -27,7 +27,7 @@ export default class ShipmentServices {
       }
     });
 
-    app.get('/api/demo/shipment/:id?', (req: Request, res: Response) => {
+    app.get('/api/demo/shipment/:id?', authentication, (req: Request, res: Response) => {
       try {
         if (req.params.id) return this.getById(req, res);
         else return this.getAll(req, res);
@@ -45,7 +45,7 @@ export default class ShipmentServices {
       }
     });
 
-    app.put('/api/demo/shipment/:id', (req: Request, res: Response) => {
+    app.put('/api/demo/shipment/:id', authentication, authorize('admin'), (req: Request, res: Response) => {
       try {
         return this.update(req, res);
       } catch (e) {
@@ -62,7 +62,7 @@ export default class ShipmentServices {
       }
     });
 
-    app.delete('/api/demo/shipment/:id', (req: Request, res: Response) => {
+    app.delete('/api/demo/shipment/:id', authentication, authorize('admin'), (req: Request, res: Response) => {
       try {
         return this.delete(req, res);
       } catch (e) {
