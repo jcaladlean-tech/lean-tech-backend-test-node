@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS shipment (
     pickupdate DATE,
     deliveryDate DATE,
     status TEXT,
-    carrierRate INTEGER
+    carrierRate DECIMAL
 );
 
 -- Creates carrier table

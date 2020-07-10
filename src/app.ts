@@ -10,6 +10,7 @@ import EIAAPIServices from './services/EIAAPIServices';
 import CarrierServices from './services/CarrierServices';
 import ShipmentServices from './services/ShipmentServices';
 import UserServices from './services/UserServices';
+import ImportExportDataServices from './services/ImportExportDataServices';
 
 class App {
   public app: express.Application;
@@ -38,6 +39,7 @@ class App {
     CarrierServices.routes(this.app);
     ShipmentServices.routes(this.app);
     UserServices.routes(this.app);
+    ImportExportDataServices.routes(this.app);
   }
 }
 
