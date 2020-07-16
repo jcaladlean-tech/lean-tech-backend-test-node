@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <h1 style="color: #0000ff;">API index</h1>
+    <h3 style="color: #0000ff;">Hello World</h3>
+    <ol style="list-style: none; font-size: 12px; line-height: 32px; font-weight: bold;">
+        <li style="clear: both;">[GET]&nbsp; &nbsp; &nbsp; &nbsp; /holamundo/txt</li>
+        <li style="clear: both;">[GET]&nbsp; &nbsp; &nbsp; &nbsp; /holamundo/json</li>
+    </ol>
+    <h3 style="color: #0000ff;">NoSQL</h3>
+    <ol style="list-style: none; font-size: 12px; line-height: 32px; font-weight: bold;">
+        <li style="clear: both;">[POST]&nbsp; &nbsp; &nbsp; /api/nosql/shipment&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Create</li>
+        <li style="clear: both;">[GET]&nbsp; &nbsp; &nbsp; &nbsp; /api/nosql/shipment&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;GetAll</li>
+        <li style="clear: both;">[GET]&nbsp; &nbsp; &nbsp; &nbsp; /api/nosql/shipment/:id&nbsp; &nbsp; &nbsp; &nbsp;GetOne</li>
+        <li style="clear: both;">[PUT]&nbsp; &nbsp; &nbsp; &nbsp; /api/nosql/shipment/:id&nbsp; &nbsp; &nbsp; &nbsp;UpdateOne</li>
+        <li style="clear: both;">[DELETE]&nbsp; /api/nosql/shipment/:id&nbsp; &nbsp; &nbsp; &nbsp;DeleteOne</li>
+    </ol>
+    <h3 style="color: #0000ff;">SQL</h3>
+    <ol style="list-style: none; font-size: 12px; line-height: 32px; font-weight: bold;">
+        <li style="clear: both;">[POST]&nbsp; &nbsp; &nbsp; /api/sql/shipment&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Create</li>
+        <li style="clear: both;">[GET]&nbsp; &nbsp; &nbsp; &nbsp; /api/sql/shipment&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;GetAll</li>
+        <li style="clear: both;">[GET]&nbsp; &nbsp; &nbsp; &nbsp; /api/sql/shipment/:id&nbsp; &nbsp; &nbsp; &nbsp;GetOne</li>
+        <li style="clear: both;">[PUT]&nbsp; &nbsp; &nbsp; &nbsp; /api/sql/shipment/:id&nbsp; &nbsp; &nbsp; &nbsp;UpdateOne</li>
+        <li style="clear: both;">[DELETE]&nbsp; /api/sql/shipment/:id&nbsp; &nbsp; &nbsp; &nbsp;DeleteOne</li>
+    </ol>
+    <h3 style="color: #0000ff;">EIA API</h3>
+    <ol style="list-style: none; font-size: 12px; line-height: 32px; font-weight: bold;">
+        <li style="clear: both;">[GET]&nbsp; &nbsp; &nbsp; &nbsp; /eia</li>
+    </ol>
+    <h1 style="color: #0000ff;">&nbsp;</h1>
+    <h1 style="color: #0000ff;">Demo</h1>
+    <h3 style="color: #0000ff;">Carrier</h3>
+    <ol style="list-style: none; font-size: 12px; line-height: 32px; font-weight: bold;">
+        <li style="clear: both;">[POST]&nbsp; &nbsp; &nbsp; /api/demo/carrier&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Create Carrier</li>
+        <li style="clear: both;">[GET]&nbsp; &nbsp; &nbsp; &nbsp; /api/demo/carrier&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;GetAll Carriers</li>
+        <li style="clear: both;">[GET]&nbsp; &nbsp; &nbsp; &nbsp; /api/demo/carrier/:id&nbsp; &nbsp; &nbsp; &nbsp;GetOne Carrier</li>
+        <li style="clear: both;">[PUT]&nbsp; &nbsp; &nbsp; &nbsp; /api/demo/carrier/:id&nbsp; &nbsp; &nbsp; &nbsp;UpdateOne Carrier</li>
+        <li style="clear: both;">[DELETE]&nbsp; /api/demo/carrier/:id&nbsp; &nbsp; &nbsp; &nbsp;DeleteOne Carrier</li>
+    </ol>
+    <h3 style="color: #0000ff;">Shipment</h3>
+    <ol style="list-style: none; font-size: 12px; line-height: 32px; font-weight: bold;">
+        <li style="clear: both;">[POST]&nbsp; &nbsp; &nbsp; /api/demo/shipment&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Create Shipment</li>
+        <li style="clear: both;">[GET]&nbsp; &nbsp; &nbsp; &nbsp; /api/demo/shipment&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;GetAll Shipments</li>
+        <li style="clear: both;">[GET]&nbsp; &nbsp; &nbsp; &nbsp; /api/demo/shipment/:id&nbsp; &nbsp; &nbsp; &nbsp;GetOne Shipment</li>
+        <li style="clear: both;">[PUT]&nbsp; &nbsp; &nbsp; &nbsp; /api/demo/shipment/:id&nbsp; &nbsp; &nbsp; &nbsp;UpdateOne Shipment</li>
+        <li style="clear: both;">[DELETE]&nbsp; /api/demo/shipment/:id&nbsp; &nbsp; &nbsp; &nbsp;DeleteOne Shipment</li>
+    </ol>
+    <h3 style="color: #0000ff;">User</h3>
+    <ol style="list-style: none; font-size: 12px; line-height: 32px; font-weight: bold;">
+        <li style="clear: both;">[POST]&nbsp; &nbsp; &nbsp; /api/demo/signup&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Create User</li>
+        <li style="clear: both;">[POST]&nbsp; &nbsp; &nbsp; /api/demo/signin&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Login</li>
+        <li style="clear: both;">[PUT]&nbsp; &nbsp; &nbsp; &nbsp; /api/demo/signout&nbsp; &nbsp; &nbsp; &nbsp; SignOut</li>
+    </ol>
+    <h3 style="color: #0000ff;">Import - Export</h3>
+    <ol style="list-style: none; font-size: 12px; line-height: 32px; font-weight: bold;">
+        <li style="clear: both;">[POST]&nbsp; &nbsp; &nbsp; /api/demo/import/carrier&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Import Carrier Data</li>
+        <li style="clear: both;">[POST]&nbsp; &nbsp; &nbsp; /api/demo/import/shipment&nbsp; &nbsp; &nbsp; &nbsp;Import Shipment Data</li>
+        <li style="clear: both;">[PUT]&nbsp; &nbsp; &nbsp; &nbsp; /api/demo/export&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Export Data</li>
+    </ol>
+</body>
+</html>
