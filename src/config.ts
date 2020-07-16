@@ -25,11 +25,18 @@ export const config = {
     password: process.env.PGPASSWORD,
     port: process.env.PGPORT,
   },
-  eia:{
+  eia: {
     apiKey: process.env.EIA_API_KEY,
-    baseUrl: process.env.EIA_URL
+    baseUrl: process.env.EIA_URL,
   },
   auth: {
-    token_key: process.env.TOKEN_KEY
-  }
+    token_key: process.env.TOKEN_KEY,
+  },
+  googleDrive: {
+    client_id: process.env.CLIENT_ID,
+    client_secret: process.env.CLIENT_SECRET,
+    redirect_uris: process.env.REDIRECT_URIS,
+    refresh_token: process.env.REFRESH_TOKEN,
+    folder: process.env.FOLDER,
+  },
 };

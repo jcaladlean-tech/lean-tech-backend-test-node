@@ -91,4 +91,20 @@ export default class ShipmentPostgreSql {
         return Promise.reject(err);
       });
   }
+
+  public async getExportData(): Promise<any> {
+    return PosgreSqlDB.getConnection()
+      .then((connection: Client) => {
+        const query = {
+          text: 'SELECT carrier.name, carrier.scac, shipment.pickupdate, shipment.deliveryDate , shipment.status, shipment.originCity, COUNT(shipment.carrierRate) AS countOrders, AVG(shipment.carrierRate) AS averageCarrierRate, SUM(shipment.carrierRate) AS totalCarrierRate FROM shipment INNER JOIN carrier ON shipment.carrierId = carrier.id GROUP BY carrier.id, shipment.pickupdate, shipment.deliveryDate, shipment.status, shipment.originCity ORDER BY carrier.id',
+        };
+        return connection.query(query);
+      })
+      .then((res: any) => {
+        return Promise.resolve(res.rows);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  }
 }

@@ -22,4 +22,5 @@ export interface IShipmentController {
     getShipmentById(id: string): Promise<ResponseOperation<IShipment>>;
     updateShipment(id: string, shipment: IShipment): Promise<ResponseOperation<IShipment>>;
     deleteShipment(id: string): Promise<ResponseOperation<IShipment>>;
+    getExportData(): Promise<ResponseOperation<any>>;
 }

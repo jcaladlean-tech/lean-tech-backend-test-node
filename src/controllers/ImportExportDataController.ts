@@ -4,8 +4,11 @@ import { ICarrier } from '../interfaces/CarrierInterfaces';
 import { IShipment } from '../interfaces/ShipmentInterfaces';
 import ResponseOperation from '../helpers/ResponseOperation';
 import excelToJson from 'convert-excel-to-json';
+import json2xls from 'json2xls';
+import moment from 'moment';
 import fs from 'fs';
 import { HttpCode } from '../helpers/HttpCodes';
+import { ExportToDrive } from '../helpers/ExportToDrive';
 
 export default class ImportExportDataController {
   sqlCarrier: CarrierPostgreSql;
@@ -80,14 +83,25 @@ export default class ImportExportDataController {
       })
       .catch((err) => {
         return Promise.reject(
-          new ResponseOperation<{msg: string, total: number}>(
-            false,
-            HttpCode.INTERNAL_ERROR,
-            null,
-            err
-          )
+          new ResponseOperation<{msg: string, total: number}>(false, HttpCode.INTERNAL_ERROR, null, err)
         );
       });
+  }
+
+  public async exportData(): Promise<ResponseOperation<{ msg: string }>> {
+    return this.sqlShipment.getExportData().then(async (result) => {
+      const fileName = this.jsonToXls(result);
+      await ExportToDrive(fileName , 'xlsx');
+      fs.unlinkSync(`temp/${fileName}`);
+      const msg = 'File exported';
+      return Promise.resolve(
+        new ResponseOperation<{ msg: string }>(true, HttpCode.CREATED, { msg })
+      ).catch((err) => {
+        return Promise.reject(
+          new ResponseOperation<{ msg: string }>(false, HttpCode.INTERNAL_ERROR, null, err)
+        );
+      });
+    });
   }
 
   private xlsxToJson(filePath: string, sheetName: string): any[] {
@@ -106,6 +120,13 @@ export default class ImportExportDataController {
     });
     fs.unlinkSync(filePath);
     return excelData[sheetName];
+  }
+
+  private jsonToXls(data: any) {
+    const xls = json2xls(data);
+    const fileName = `${moment().format('YYYYMMDDmm')}.xlsx`;
+    fs.writeFileSync(`temp/${fileName}`, xls, 'binary');
+    return fileName;
   }
 
   private mappingColumns(sheetName: string): object {

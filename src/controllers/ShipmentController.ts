@@ -87,4 +87,19 @@ export default class ShipmentController implements IShipmentController {
         );
       });
   }
+
+  public async getExportData(): Promise<ResponseOperation<any>> {
+    return this.sqlShipment
+        .getExportData()
+        .then((shipments: any) => {
+          return Promise.resolve(
+              new ResponseOperation<any>(true, HttpCode.OK, shipments)
+          );
+        })
+        .catch((err) => {
+          return Promise.reject(
+              new ResponseOperation<any>(false, HttpCode.INTERNAL_ERROR, null, err)
+          );
+        });
+  }
 }

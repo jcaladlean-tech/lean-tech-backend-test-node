@@ -16,6 +16,14 @@ export default class ImportExportDataServices {
                 return this.response(res, new ResponseOperation<any>(false, HttpCode.BAD_REQUEST, null, {msf: 'Incorrect params'}));
             }
         });
+
+        app.post('/api/demo/export', authentication, authorize('admin'), (req: any, res: Response) => {
+            try {
+                this.export(req, res);
+            } catch (e){
+                return res.json({a: 1});
+            }
+        });
     }
 
     private static import(req: Request, res: Response){
@@ -26,6 +34,14 @@ export default class ImportExportDataServices {
         const userData = req.file.path
 
         controller.importData(userData, sheetName)
+            .then((result) => this.response(res, result))
+            .catch((result) => this.response(res, result));
+    }
+
+    private static export(req: Request, res: Response){
+        const controller = new ImportExportDataController();
+
+        controller.exportData()
             .then((result) => this.response(res, result))
             .catch((result) => this.response(res, result));
     }
