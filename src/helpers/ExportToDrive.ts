@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { google } from 'googleapis';
-import { config } from '../config'
+import { config } from '../config';
 import { OAuth2Client } from 'googleapis-common';
 
 export async function ExportToDrive(fileName: string, type: string) {
@@ -8,21 +8,21 @@ export async function ExportToDrive(fileName: string, type: string) {
     const auth = new google.auth.OAuth2(
       config.googleDrive.client_id,
       config.googleDrive.client_secret,
-      config.googleDrive.redirect_uris,
+      config.googleDrive.redirect_uris
     );
     auth.setCredentials({ refresh_token: config.googleDrive.refresh_token });
     const mimeType = type === 'csv' ? 'text/csv' : 'application/vnd.ms-excel';
-    upload(auth, { name: fileName, mimeType });
+    return await upload(auth, { name: fileName, mimeType });
   } catch (e) {
     return e;
   }
 }
 
-function upload(auth: OAuth2Client, metadata: { name: string; mimeType: string }) {
+async function upload(auth: OAuth2Client, metadata: { name: string; mimeType: string }) {
   const { name, mimeType } = metadata;
-  const drive = google.drive({ version: 'v3', auth });
-  drive.files.create(
-    {
+  try {
+    const drive = google.drive({ version: 'v3', auth });
+    const file = await drive.files.create({
       requestBody: {
         name,
         parents: [config.googleDrive.folder],
@@ -32,12 +32,10 @@ function upload(auth: OAuth2Client, metadata: { name: string; mimeType: string }
         mimeType,
         body: fs.createReadStream(`temp/${name}`),
       },
-      fields: 'id',
-    },
-    function (err, file) {
-      if (err) {
-        console.error(err);
-      }
-    }
-  );
+      fields: '*',
+    });
+    return file.data.webViewLink;
+  } catch (e) {
+    return e;
+  }
 }

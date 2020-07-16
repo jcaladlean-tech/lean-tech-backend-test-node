@@ -39,4 +39,8 @@ export const config = {
     refresh_token: process.env.REFRESH_TOKEN,
     folder: process.env.FOLDER,
   },
+  sendEmail: {
+    email: process.env.EMAIL,
+    password: process.env.PASSWORD,
+  }
 };

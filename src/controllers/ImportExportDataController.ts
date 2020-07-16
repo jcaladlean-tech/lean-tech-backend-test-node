@@ -2,13 +2,15 @@ import CarrierPostgreSql from '../models/Carrier/CarrierPostgreSql';
 import ShipmentPostgreSql from '../models/Shipment/ShipmentPostgreSql';
 import { ICarrier } from '../interfaces/CarrierInterfaces';
 import { IShipment } from '../interfaces/ShipmentInterfaces';
-import ResponseOperation from '../helpers/ResponseOperation';
 import excelToJson from 'convert-excel-to-json';
 import json2xls from 'json2xls';
+import { Parser } from 'json2csv';
 import moment from 'moment';
 import fs from 'fs';
+import ResponseOperation from '../helpers/ResponseOperation';
 import { HttpCode } from '../helpers/HttpCodes';
 import { ExportToDrive } from '../helpers/ExportToDrive';
+import { SendEmail } from '../helpers/SendEmail';
 
 export default class ImportExportDataController {
   sqlCarrier: CarrierPostgreSql;
@@ -88,10 +90,11 @@ export default class ImportExportDataController {
       });
   }
 
-  public async exportData(): Promise<ResponseOperation<{ msg: string }>> {
+  public async exportData(email: string, fileType: string): Promise<ResponseOperation<{ msg: string }>> {
     return this.sqlShipment.getExportData().then(async (result) => {
-      const fileName = this.jsonToXls(result);
-      await ExportToDrive(fileName , 'xlsx');
+      const fileName = fileType === 'csv' ? this.jsonToCsv(result) : this.jsonToXls(result);
+      const url = await ExportToDrive(fileName, fileType);
+      await SendEmail(email, url);
       fs.unlinkSync(`temp/${fileName}`);
       const msg = 'File exported';
       return Promise.resolve(
@@ -126,6 +129,14 @@ export default class ImportExportDataController {
     const xls = json2xls(data);
     const fileName = `${moment().format('YYYYMMDDmm')}.xlsx`;
     fs.writeFileSync(`temp/${fileName}`, xls, 'binary');
+    return fileName;
+  }
+
+  private jsonToCsv(data: any) {
+    const json2csvParser = new Parser();
+    const csv = json2csvParser.parse(data);
+    const fileName = `${moment().format('YYYYMMDDmm')}.csv`;
+    fs.writeFileSync(`temp/${fileName}`, csv, 'binary');
     return fileName;
   }
 

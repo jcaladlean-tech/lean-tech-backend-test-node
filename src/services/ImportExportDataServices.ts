@@ -31,17 +31,18 @@ export default class ImportExportDataServices {
         let sheetName = ''
         if (req.params.sheetName === 'carrier') sheetName = 'Carrier'
         if (req.params.sheetName === 'shipment') sheetName = 'Data'
-        const userData = req.file.path
+        const filePath = req.file.path
 
-        controller.importData(userData, sheetName)
+        controller.importData(filePath, sheetName)
             .then((result) => this.response(res, result))
             .catch((result) => this.response(res, result));
     }
 
-    private static export(req: Request, res: Response){
+    private static export(req: any, res: Response){
         const controller = new ImportExportDataController();
+        const { body: { fileType }, user: { email } }  = req;
 
-        controller.exportData()
+        controller.exportData(email,fileType)
             .then((result) => this.response(res, result))
             .catch((result) => this.response(res, result));
     }
@@ -49,6 +50,4 @@ export default class ImportExportDataServices {
     private static response(res: Response, result: ResponseOperation<any>){
         res.status(result.statusCode).json(result);
     }
-
-
 }
