@@ -9,7 +9,6 @@ RUN npm install
 
 # Bundle app source
 COPY . .
-RUN npm run initdb
 RUN npm run build
 
 EXPOSE 8080
